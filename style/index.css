@@ -23,3 +23,7 @@ html body {
   align-items: center;
   padding: 20px;
 }
+
+#content form input {
+  margin-top: 10px;
+}
