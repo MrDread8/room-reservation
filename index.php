@@ -5,13 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style/index.css">
     <title>Room Reservation</title>
+    <script src="assets/loading.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="load()">
     <div id="content">
         <form action="components/login.php" method="POST" enctype="multipart/form-data">
-            <input type="text" name="password" placeholder="login">
-            <input type="password" name="password" placeholder="password">
-            <input type="button" value="LOG IN">
+        <h1>LOGIN</h1>
+            <input type="text" name="login" placeholder="login" class="input_text">
+            <input type="password" name="password" placeholder="password" class="input_text">
+            <input type="submit" value="LOG IN">
         </form>
     </div>
 </body>
