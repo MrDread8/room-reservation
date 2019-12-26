@@ -27,7 +27,7 @@ html body {
 
 #content form h1 {
   color: #00A4E5;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 #content form input {
@@ -65,4 +65,9 @@ html body {
   color: white;
   border: 0px solid #00A4E5;
   font-size: 15px;
+}
+
+#content form #logginerror {
+  margin-top: 10px;
+  color: red;
 }

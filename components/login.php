@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once('db_connection.php');
 
     $login = $_POST['login'];
@@ -31,6 +32,8 @@
 
                                 $_SESSION['userid'] = $row['id'];
 
+                                header("Location: ../usermainpage.php");
+                                exit();
                             }
                         }
         $result->free();
