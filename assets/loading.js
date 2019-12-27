@@ -1,3 +1,5 @@
 var loader = document.getElementById("loader");
 
-loader.style.display = "none";
+var x = setTimeout(function(){
+    loader.style.display = "none";
+}, 500);

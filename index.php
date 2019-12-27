@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if($_SESSION['loggedin']){
+        header("Location: usermainpage.php");
+        exit();
+    }
+    session_destroy();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
