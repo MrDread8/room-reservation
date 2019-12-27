@@ -14,6 +14,10 @@
             <li>RESERVATIONS</li>
             <li>SETTINGS</li>
         </ul>
+        <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
+    <div id="content">
+            test
+    </div>
 </body>
 </html>
