@@ -1,10 +1,11 @@
 <?php
     session_start();
+
     if(!$_SESSION['loggedin']){
         header("Location: index.php");
         exit();
     }
-    session_destroy();
+
 ?>
 <html lang="en">
 <head>
@@ -17,14 +18,14 @@
     <title>Room Reservation</title>
 </head>
 <body>
-    <div id="loader">
-        LOADING
-    </div>
+    <?php
+        require_once('components/loader.php');
+    ?>
     <nav>
         <ul>
-            <li>HOME</li>
-            <li>RESERVATIONS</li>
-            <li>SETTINGS</li>
+            <a href="index.php"><li>HOME</li><a>
+            <a href="reservations.php"><li>RESERVATIONS</li><a>
+            <a href="userpage.php"><li>USER</li><a>
         </ul>
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>

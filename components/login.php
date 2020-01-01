@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     require_once('db_connection.php');
 
     $login = $_POST['login'];
@@ -36,6 +37,11 @@
                                 exit();
                             }
                         }
-        $result->free();
+        else{
+            $_SESSION['logginerror'] = true;
+            header("Location: ../index.php");
+            $result->free();
+            exit();
+        }
     }
 ?>
