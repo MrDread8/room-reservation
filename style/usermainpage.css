@@ -78,3 +78,14 @@ nav #logout-button:hover {
   height: 100%;
   float: right;
 }
+
+#content #next_reservation {
+  color: #00A4E5;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+}
+
+#content #next_reservation h1 {
+  color: black;
+  font-weight: normal;
+}
