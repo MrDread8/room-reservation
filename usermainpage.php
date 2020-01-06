@@ -34,22 +34,25 @@
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
     <div id="content">
-        <div id="next_reservation">
+        <div id="next_appointment">
             <?php
 
                 $date = date('Y-m-d');
                 $time = date('H:i:s');
 
-                if($result = $connection->query("SELECT * FROM reservations WHERE reservations.end_date >= '$date' AND reservations.end_time >= '$time' GROUP BY reservations.start_date, reservations.start_time ASC")){
+                if($result = $connection->query("SELECT * FROM appointments WHERE appointments.end_date >= '$date' AND appointments.end_time >= '$time' GROUP BY appointments.start_date, appointments.start_time ASC")){
                     if($result->num_rows != 0){
-                        $next_reservation = $result->fetch_assoc();
-                        echo "<h1>Next reservation</h1> ".$next_reservation['start_date']." ".$next_reservation['start_time'];
+                        $next_appointment = $result->fetch_assoc();
+                        echo "<h1>Next appointment</h1> ".$next_appointment['start_date']." ".substr($next_appointment['start_time'],0,5);
                     }
                     else{
-                        echo "<h1>Next reservation</h1> No Reservation";
+                        echo "<h1>Next appointment</h1> No appointments";
                     }
                 }
             ?>
+        </div>
+        <div id="appointments_list">
+
         </div>
     </div>
     <script src="assets/loading.js"></script>
