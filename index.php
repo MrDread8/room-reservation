@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loader">
-        LOADINg
-    </div>
+    <?php
+        require_once('components/loader.php');
+    ?>
     <div id="content">
         <form action="components/login.php" method="POST" enctype="multipart/form-data">
         <h1>LOGIN</h1>
