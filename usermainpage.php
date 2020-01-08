@@ -37,13 +37,13 @@
         <div id="next_appointment">
             <?php
 
-                $date = date('Y-m-d');
-                $time = date('H:i:s');
+                $date = date('Y-m-d H:i:s');
+                $userid = $_SESSION['userid'];
 
-                if($result = $connection->query("SELECT * FROM appointments WHERE appointments.end_date >= '$date' AND appointments.end_time >= '$time' GROUP BY appointments.start_date, appointments.start_time ASC")){
+                if($result = $connection->query("SELECT * FROM appointments WHERE appointments.user_id = '$userid' AND appointments.end_time >= '$date' ORDER BY appointments.start_time ASC;")){
                     if($result->num_rows != 0){
-                        $next_appointment = $result->fetch_assoc();
-                        echo "<h1>Next appointment</h1> ".$next_appointment['start_date']." ".substr($next_appointment['start_time'],0,5);
+                        $next_reservation = $result->fetch_assoc();
+                        echo "<h1>Next appointment</h1> ".substr($next_reservation['end_time'],0,16);
                     }
                     else{
                         echo "<h1>Next appointment</h1> No appointments";
@@ -52,7 +52,20 @@
             ?>
         </div>
         <div id="appointments_list">
+                <h1>All Appointments</h1>
+                <table>
+                    <tr><th>ID</th><th>ROOM NAME</th><th>START TIME</th><th>END TIME</th></tr>
+                        <?php
+                            $date = date('Y-m-d H:i:s');
+                            $userid = $_SESSION['userid'];
 
+                            if($result = $connection->query("SELECT *, appointments.id AS appointments_id FROM appointments LEFT JOIN rooms ON appointments.room_id = rooms.id WHERE appointments.user_id = '$userid'")){
+                                while($row = $result->fetch_assoc()){
+                                    echo "<tr><td>".$row['appointments_id']."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
+                                }
+                            }
+                        ?>
+                </table>
         </div>
     </div>
     <script src="assets/loading.js"></script>
