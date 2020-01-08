@@ -125,3 +125,7 @@ nav #logout-button:hover {
 #content #appointments_list table td {
   padding: 5px;
 }
+
+#content #appointments_list table tr:last-child {
+  display: none;
+}

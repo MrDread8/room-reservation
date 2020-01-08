@@ -43,7 +43,7 @@
                 if($result = $connection->query("SELECT * FROM appointments WHERE appointments.user_id = '$userid' AND appointments.end_time >= '$date' ORDER BY appointments.start_time ASC;")){
                     if($result->num_rows != 0){
                         $next_reservation = $result->fetch_assoc();
-                        echo "<h1>Next appointment</h1> ".substr($next_reservation['end_time'],0,16);
+                        echo "<h1>Next appointment</h1> ".substr($next_reservation['start_time'],0,16);
                     }
                     else{
                         echo "<h1>Next appointment</h1> No appointments";
@@ -60,8 +60,11 @@
                             $userid = $_SESSION['userid'];
 
                             if($result = $connection->query("SELECT *, appointments.id AS appointments_id FROM appointments LEFT JOIN rooms ON appointments.room_id = rooms.id WHERE appointments.user_id = '$userid'")){
+                                $row = $result->fetch_assoc();
+                                $id =1;
                                 while($row = $result->fetch_assoc()){
-                                    echo "<tr><td>".$row['appointments_id']."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
+                                    echo "<tr><td>".$id."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
+                                    $id++;
                                 }
                             }
                         ?>
