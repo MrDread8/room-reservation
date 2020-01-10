@@ -61,7 +61,7 @@
 
                             if($result = $connection->query("SELECT *, appointments.id AS appointments_id FROM appointments LEFT JOIN rooms ON appointments.room_id = rooms.id WHERE appointments.user_id = '$userid'")){
                                 $row = $result->fetch_assoc();
-                                $id =1;
+                                $id = 1;
                                 while($row = $result->fetch_assoc()){
                                     echo "<tr><td>".$id."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
                                     $id++;

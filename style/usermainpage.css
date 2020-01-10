@@ -129,3 +129,7 @@ nav #logout-button:hover {
 #content #appointments_list table tr:last-child {
   display: none;
 }
+
+#content #appointments_list table tr:nth-child(odd) {
+  background-color: #E7F6FC;
+}
