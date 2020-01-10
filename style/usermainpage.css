@@ -79,13 +79,13 @@ nav #logout-button:hover {
   height: 100%;
   float: right;
   overflow: auto;
+  padding: 20px;
 }
 
 #content #next_appointment {
   color: #00A4E5;
   font-family: "Ubuntu", sans-serif;
   font-weight: bold;
-  padding: 20px;
 }
 
 #content #next_appointment h1 {
@@ -95,4 +95,41 @@ nav #logout-button:hover {
 
 #content #appointments_list {
   width: 100%;
+}
+
+#content #appointments_list h1 {
+  font-family: "Ubuntu", sans-serif;
+}
+
+#content #appointments_list table {
+  width: 100%;
+  font-family: 'Lato',sans-serif;
+  border: 0px solid;
+  border-collapse: collapse;
+}
+
+#content #appointments_list table th {
+  text-align: center;
+  font-family: "Ubuntu", sans-serif;
+  padding: 5px;
+  background-color: #00A4E5;
+  color: white;
+  margin: 0;
+}
+
+#content #appointments_list table tr {
+  text-align: center;
+  margin: 0;
+}
+
+#content #appointments_list table td {
+  padding: 5px;
+}
+
+#content #appointments_list table tr:last-child {
+  display: none;
+}
+
+#content #appointments_list table tr:nth-child(odd) {
+  background-color: #E7F6FC;
 }
