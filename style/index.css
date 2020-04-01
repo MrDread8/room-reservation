@@ -27,6 +27,7 @@ html body {
   align-items: center;
   padding: 20px;
   width: 300px;
+  font-family: 'Lato',sans-serif;
 }
 
 #content form h1 {
@@ -44,6 +45,7 @@ html body {
   border: 0;
   border-bottom: 1px solid #00A4E5;
   transition: all 500ms ease;
+  font-family: 'Lato',sans-serif;
 }
 
 #content form .input_text:focus {
@@ -61,6 +63,7 @@ html body {
   border: 1px solid #00A4E5;
   font-size: 15px;
   transition: all 500ms ease;
+  font-family: 'Lato',sans-serif;
 }
 
 #content form input[type="submit"]:hover {

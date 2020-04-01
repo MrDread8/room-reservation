@@ -1,1 +1,43 @@
-null
+form {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input[type='datetime-local'] {
+  width: 250px;
+  height: 30px;
+  margin-left: 5px;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+form input[type='submit'] {
+  width: 200px;
+  height: 30px;
+  border: 1px solid #00A4E5;
+  padding: 0;
+  margin: 0;
+  background-color: #FFFFFF;
+  margin-left: 5px;
+  font-family: 'Ubuntu', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 500ms ease;
+}
+
+form input[type='submit']:hover {
+  color: #FFFFFF;
+  background-color: #00A4E5;
+}
+
+#rooms {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 300px 300px 300px;
+  grid-template-columns: auto;
+  grid-gap: 20px;
+}

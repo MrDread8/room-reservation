@@ -24,7 +24,8 @@
 </head>
 <body>
     <?php
-        require_once('components/loader.php')
+        require_once('components/loader.php');
+        $date = date('Y-m-d')."T".date('H:i');
     ?>
     <nav>
         <ul>
@@ -35,13 +36,14 @@
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
     <div id="content">
-      <table>
-        <?php
-        $userid = $_SESSION['userid'];
+      <form action="" method="post">
+        <input type="datetime-local" name="date_start" min="<?php echo $date;?>">
+        <input type="datetime-local" name="date_end" min="<?php echo $date;?>">
+        <input type="submit" value="Search">
+      </form>
+      <div id="rooms">
 
-        $connection->query("SELECT * FROM appointments WHERE ")
-        ?>
-      </table>
+      </div>
     </div>
     <script src="assets/loading.js"></script>
 </body>
