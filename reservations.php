@@ -16,9 +16,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/usermainpage.css">
-    <link rel="stylesheet" href="style/reservations.css">
-    <link rel="stylesheet" href="style/loader.css">
+    <link rel="stylesheet" href="style/usermainpage.min.css">
+    <link rel="stylesheet" href="style/reservations.min.css">
+    <link rel="stylesheet" href="style/loader.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
     <title>Room Reservation</title>
 </head>
@@ -35,7 +35,13 @@
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
     <div id="content">
+      <table>
+        <?php
+        $userid = $_SESSION['userid'];
 
+        $connection->query("SELECT * FROM appointments WHERE ")
+        ?>
+      </table>
     </div>
     <script src="assets/loading.js"></script>
 </body>

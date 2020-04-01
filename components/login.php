@@ -16,7 +16,7 @@
         echo "Error: ".$connection->connect_errno."<br/>Contact with website administrator!";
     }
     else{
-        if($result = $connection->query(sprintf("SELECT * FROM users WHERE nick = '%s' AND pass = '%s'",
+        if($result = $connection->query(sprintf("SELECT * FROM users WHERE login = '%s' AND password = '%s'",
                         mysqli_real_escape_string($connection,$login),
                         mysqli_real_escape_string($connection,$password)))){
                             if($result->num_rows != 1)
