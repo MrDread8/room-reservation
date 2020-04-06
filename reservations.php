@@ -36,14 +36,36 @@
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
     <div id="content">
-      <form action="" method="post">
-        <input type="datetime-local" name="date_start" min="<?php echo $date;?>">
-        <input type="datetime-local" name="date_end" min="<?php echo $date;?>">
-        <input type="submit" value="Search">
-      </form>
-      <div id="rooms">
 
+      <div id="search_bar">
+          <form class="" action="" method="post">
+              <input type="datetime-local" name="startTime" min="<?php echo $date;?>" required>
+              <input type="datetime-local" name="endTime" value="" min="<?php echo $date;?>" required>
+              <input type="submit" value="Search">
+          </form>
       </div>
+
+      <div id="rooms">
+        <div class="available">
+          <h1>1</h1>
+        </div>
+        <div class="available">
+          <h1>2</h1>
+          <form class="" action="index.html" method="post">
+            <input type="button" name="" value="">
+          </form>
+        </div>
+        <div class="available">
+
+        </div>
+        <div class="reserved">
+
+        </div>
+        <div class="reserved">
+
+        </div>
+      </div>
+
     </div>
     <script src="assets/loading.js"></script>
 </body>
