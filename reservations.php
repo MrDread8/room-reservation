@@ -46,23 +46,20 @@
       </div>
 
       <div id="rooms">
-        <div class="available">
+        <div class="available tile">
           <h1>1</h1>
         </div>
-        <div class="available">
+        <div class="available tile">
           <h1>2</h1>
           <form class="" action="index.html" method="post">
-            <input type="button" name="" value="">
+            <input type="button" name="" value="Reservate">
           </form>
         </div>
-        <div class="available">
-
-        </div>
-        <div class="reserved">
-
-        </div>
-        <div class="reserved">
-
+        <div class="reserved tile">
+          <h1>2</h1>
+          <form class="" action="index.html" method="post">
+            <input type="button" name="" value="Reservate" disabled>
+          </form>
         </div>
       </div>
 

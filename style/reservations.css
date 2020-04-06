@@ -58,33 +58,49 @@
   justify-content: center;
 }
 
-#rooms .available {
+#rooms .tile {
   width: 100%;
-  height: 300px;
-  background-color: #52D859;
+  height: 250px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   font-family: 'Lato', sans-serif;
-  color: #FFFFFF;
   padding: 10px;
 }
 
-#rooms .available h1 {
+#rooms .tile h1 {
   position: relative;
   transform: translateY(-50%);
   top: 50%;
   margin: 0;
 }
 
-#rooms .available form {
+#rooms .tile form {
   margin: 0;
 }
 
+#rooms .tile form input[type="button"] {
+  background-color: transparent;
+  border: 3px solid #F2F2F2;
+  padding: 10px;
+  color: #F2F2F2;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bolder;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+#rooms .tile form input[type="button"]:hover {
+  cursor: pointer;
+}
+
+#rooms .available {
+  background-color: #4FD155;
+  color: #FFFFFF;
+}
+
 #rooms .reserved {
-  width: 100%;
-  height: 300px;
   background-color: #CC6666;
   color: #FFFFFF;
 }
