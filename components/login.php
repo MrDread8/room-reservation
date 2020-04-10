@@ -17,8 +17,8 @@
     }
     else{
         if($result = $connection->query(sprintf("SELECT * FROM users WHERE login = '%s' AND password = '%s'",
-                        mysqli_real_escape_string($connection,$login),
-                        mysqli_real_escape_string($connection,$password)))){
+                        $connection->real_escape_string($login),
+                        $connection->real_escape_string($password)))){
                             if($result->num_rows != 1)
                             {
                                 $_SESSION['logginerror'] = true;
