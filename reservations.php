@@ -54,16 +54,13 @@
         $endDate = $_POST['endDate'];
         $endTime = $_POST['endTime'];
 
-        // $startDate = htmlentities($startDate,ENT_QUOTES,'UTF-8');
-        // $startTime = htmlentities($startTime,ENT_QUOTES,'UTF-8');
-        // $endDate = htmlentities($endDate,ENT_QUOTES,'UTF-8');
-        // $endTime = htmlentities($endTime,ENT_QUOTES,'UTF-8');
 
         $startDate = $startDate." ".$startTime;
         $endDate = $endDate." ".$endTime;
 
         $startDate = strtotime($startDate);
         $endDate = strtotime($endDate);
+        if(isset($_POST['startDate'])){
 
         if(($endDate = date("Y-m-d H:i:s", $endDate)) != false AND ($startDate = date("Y-m-d H:i:s", $startDate)) != false)
         {
@@ -71,7 +68,7 @@
             while($rooms_row = $rooms->fetch_assoc()){
               $room_id = $rooms_row['id'];
 
-              $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND ((start_time NOT BETWEEN '$startDate' AND '$endDate') OR (end_time NOT BETWEEN '$startDate' AND '$endDate') OR ('$startTime' NOT BETWEEN start_time AND end_time) OR ('$endDate' NOT BETWEEN start_time AND end_time));");
+              $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
                 if($appointments->num_rows == 0){
                   echo '<div class="available tile">
                     <h1>'.$room_id.'</h1>
@@ -92,22 +89,14 @@
               }
             }
         }
+        else {
+          echo "Erro during query! Refresh page and try again";
+        }
+          $appointments->free();
+          $rooms->free();
+        }
+
         ?>
-        <!-- <div class="available tile">
-          <h1>1</h1>
-        </div>
-        <div class="available tile">
-          <h1>2</h1>
-          <form class="" action="index.html" method="post">
-            <input type="button" name="" value="Reservate">
-          </form>
-        </div>
-        <div class="reserved tile">
-          <h1>3</h1>
-          <form class="" action="index.html" method="post">
-            <input type="button" name="" value="Reservate" disabled>
-          </form>
-        </div> -->
       </div>
 
     </div>
