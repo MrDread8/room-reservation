@@ -49,53 +49,55 @@
 
       <div id="rooms">
         <?php
-        $startDate = $_POST['startDate'];
-        $startTime = $_POST['startTime'];
-        $endDate = $_POST['endDate'];
-        $endTime = $_POST['endTime'];
 
-
-        $startDate = $startDate." ".$startTime;
-        $endDate = $endDate." ".$endTime;
-
-        $startDate = strtotime($startDate);
-        $endDate = strtotime($endDate);
         if(isset($_POST['startDate'])){
 
-        if(($endDate = date("Y-m-d H:i:s", $endDate)) != false AND ($startDate = date("Y-m-d H:i:s", $startDate)) != false)
-        {
-          if($rooms = $connection->query("SELECT id FROM rooms;")){
-            while($rooms_row = $rooms->fetch_assoc()){
-              $room_id = $rooms_row['id'];
+          $startDate = $_POST['startDate'];
+          $startTime = $_POST['startTime'];
+          $endDate = $_POST['endDate'];
+          $endTime = $_POST['endTime'];
 
-              $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
-                if($appointments->num_rows == 0){
-                  echo '<div class="available tile">
-                    <h1>'.$room_id.'</h1>
-                    <form class="" action="index.html" method="post">
-                      <input type="button" name="" value="Reservate">
-                    </form>
-                  </div>';
+
+          $startDate = $startDate." ".$startTime;
+          $endDate = $endDate." ".$endTime;
+
+          $startDate = strtotime($startDate);
+          $endDate = strtotime($endDate);
+          
+          if(($endDate = date("Y-m-d H:i:s", $endDate)) != false AND ($startDate = date("Y-m-d H:i:s", $startDate)) != false)
+          {
+            if($rooms = $connection->query("SELECT id FROM rooms;")){
+              while($rooms_row = $rooms->fetch_assoc()){
+                $room_id = $rooms_row['id'];
+
+                $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
+                  if($appointments->num_rows == 0){
+                    echo '
+                      <div class="available tile">
+                        <h1>'.$room_id.'</h1>
+                        <form class="" action="index.html" method="post">
+                          <input type="button" name="" value="Reservate">
+                        </form>
+                      </div>';
                 }
                 else {
-                  echo '<div class="reserved tile">
-                    <h1>'.$room_id.'</h1>
-                    <form class="" action="index.html" method="post">
-                      <input type="button" name="" value="Reservate" disabled>
-                    </form>
-                  </div>';
+                  echo '
+                    <div class="reserved tile">
+                      <h1>'.$room_id.'</h1>
+                        <form class="" action="index.html" method="post">
+                          <input type="button" name="" value="Reservate" disabled>
+                        </form>
+                      </div>';
                 }
-
               }
             }
-        }
-        else {
-          echo "Erro during query! Refresh page and try again";
-        }
+          }
+          else {
+            echo "Erro during query! Refresh page and try again";
+          }
           $appointments->free();
           $rooms->free();
         }
-
         ?>
       </div>
 
