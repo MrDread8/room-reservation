@@ -7,6 +7,7 @@
     else
     {
         require_once('components/db_connection.php');
+        include('includes/autoInclude.inc.php');
     }
 
 ?>
@@ -24,8 +25,6 @@
 <body>
     <?php
         require_once('components/loader.php');
-        $date = date('d-m-Y');
-        $time = date('H:i');
     ?>
     <nav>
         <ul>
@@ -39,9 +38,9 @@
 
       <div id="search_bar">
           <form class="" action="" method="post" enctype="multipart/form-data">
-              <input type="date" name="startDate" class="date" min="<?php echo $date?>" required>
+              <input type="date" name="startDate" class="date" min="<?php echo date('d-m-Y');?>" required>
               <input type="time" name="startTime" class="date" required>
-              <input type="date" name="endDate" class="date" min="<?php echo $date?>" required>
+              <input type="date" name="endDate" class="date" min="<?php echo date('d-m-Y');?>" required>
               <input type="time" name="endTime" class="date" required>
               <input type="submit" value="Search">
           </form>
@@ -49,7 +48,6 @@
 
       <div id="rooms">
         <?php
-
         if(isset($_POST['startDate'])){
 
           $startDate = $_POST['startDate'];
@@ -57,25 +55,20 @@
           $endDate = $_POST['endDate'];
           $endTime = $_POST['endTime'];
 
+          $Date = new LoadDate($startDate,$startTime,$endDate,$endTime);
 
-          $startDate = $startDate." ".$startTime;
-          $endDate = $endDate." ".$endTime;
-
-          $startDate = strtotime($startDate);
-          $endDate = strtotime($endDate);
-          
-          if(($endDate = date("Y-m-d H:i:s", $endDate)) != false AND ($startDate = date("Y-m-d H:i:s", $startDate)) != false)
+          if($Date->converStringToDate() === true)
           {
             if($rooms = $connection->query("SELECT id FROM rooms;")){
-              while($rooms_row = $rooms->fetch_assoc()){
-                $room_id = $rooms_row['id'];
+              while($rooms_obj = $rooms->fetch_object()){
 
-                $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
+                $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$rooms_obj->id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
                   if($appointments->num_rows == 0){
                     echo '
                       <div class="available tile">
-                        <h1>'.$room_id.'</h1>
-                        <form class="" action="index.html" method="post">
+                        <h1>'.$rooms_obj->id.'</h1>
+                        <form class="" action="components/reservate.php" method="post">
+                          <input type="hidden" name="room_reservating_id" value="'.$rooms_obj->id.'" />
                           <input type="button" name="" value="Reservate">
                         </form>
                       </div>';
@@ -83,20 +76,23 @@
                 else {
                   echo '
                     <div class="reserved tile">
-                      <h1>'.$room_id.'</h1>
-                        <form class="" action="index.html" method="post">
+                      <h1>'.$rooms_obj->id.'</h1>
+                        <form class="" method="post">
                           <input type="button" name="" value="Reservate" disabled>
                         </form>
                       </div>';
                 }
               }
+              $_SESSION['startDate'] = $Date->getStartDate();
+              $_SESSION['endDate'] = $Date->getEndDate();
+              $appointments->free();
+              $rooms->free();
             }
           }
           else {
             echo "Erro during query! Refresh page and try again";
           }
-          $appointments->free();
-          $rooms->free();
+
         }
         ?>
       </div>

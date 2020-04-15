@@ -23,7 +23,7 @@
 </head>
 <body>
     <?php
-        require_once('components/loader.php')
+        require_once('components/loader.php');
     ?>
     <nav>
         <ul>
@@ -65,7 +65,7 @@
                                 while($row = $result->fetch_assoc()){
                                     echo "<tr><td>".$id."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
                                     $id++;
-                                }
+                                  }
                             }
                         ?>
                 </table>
