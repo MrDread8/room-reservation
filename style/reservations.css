@@ -83,7 +83,7 @@
   margin: 0;
 }
 
-#rooms .tile form input[type="button"] {
+#rooms .tile form input[type="submit"] {
   background-color: transparent;
   border: 3px solid #F2F2F2;
   padding: 10px;
@@ -92,9 +92,10 @@
   font-weight: bolder;
   font-size: 1em;
   text-transform: uppercase;
+  display: block;
 }
 
-#rooms .tile form input[type="button"]:hover {
+#rooms .tile form input[type="submit"]:hover {
   cursor: pointer;
 }
 

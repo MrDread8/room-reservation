@@ -6,7 +6,6 @@
     }
     else
     {
-        require_once('components/db_connection.php');
         include('includes/autoInclude.inc.php');
     }
 
@@ -57,19 +56,22 @@
 
           $Date = new LoadDate($startDate,$startTime,$endDate,$endTime);
 
+          $conn = new dbh();
+
           if($Date->converStringToDate() === true)
           {
-            if($rooms = $connection->query("SELECT id FROM rooms;")){
+
+            if($rooms = $conn->dbConnect()->query("SELECT id FROM rooms;")){
               while($rooms_obj = $rooms->fetch_object()){
 
-                $appointments = $connection->query("SELECT id FROM appointments WHERE (room_id = '$rooms_obj->id') AND ((start_time BETWEEN '$startDate' AND '$endDate') OR (end_time BETWEEN '$startDate' AND '$endDate') OR ('$startTime' BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
+                $appointments = $conn->dbConnect()->query("SELECT id FROM appointments WHERE (room_id = '$rooms_obj->id') AND (($startDate BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
                   if($appointments->num_rows == 0){
                     echo '
                       <div class="available tile">
                         <h1>'.$rooms_obj->id.'</h1>
-                        <form class="" action="components/reservate.php" method="post">
-                          <input type="hidden" name="room_reservating_id" value="'.$rooms_obj->id.'" />
-                          <input type="button" name="" value="Reservate">
+                        <form class="" action="reservate.php" method="post">
+                          <input type="hidden" name="roomId" value="'.$rooms_obj->id.'" />
+                          <input type="submit" name="" value="Reservate">
                         </form>
                       </div>';
                 }
@@ -78,7 +80,7 @@
                     <div class="reserved tile">
                       <h1>'.$rooms_obj->id.'</h1>
                         <form class="" method="post">
-                          <input type="button" name="" value="Reservate" disabled>
+                          <input type="submit" name="" value="Reservate" disabled>
                         </form>
                       </div>';
                 }
