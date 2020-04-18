@@ -23,7 +23,7 @@
 </head>
 <body>
     <?php
-        require_once('components/loader.php');
+        // require_once('components/loader.php');
     ?>
     <nav>
         <ul>
@@ -54,17 +54,18 @@
           $endDate = $_POST['endDate'];
           $endTime = $_POST['endTime'];
 
-          $Date = new LoadDate($startDate,$startTime,$endDate,$endTime);
-
           $conn = new dbh();
+          $reservation = new reservation($startDate,$endDate,$_SESSION['userid']);
 
-          if($Date->converStringToDate() === true)
+          $reservation->loadDate($startDate,$startTime,$endDate,$endTime);
+
+          if($reservation->converDate() === true)
           {
 
             if($rooms = $conn->dbConnect()->query("SELECT id FROM rooms;")){
               while($rooms_obj = $rooms->fetch_object()){
 
-                $appointments = $conn->dbConnect()->query("SELECT id FROM appointments WHERE (room_id = '$rooms_obj->id') AND (($startDate BETWEEN start_time AND end_time) OR ('$endDate' BETWEEN start_time AND end_time));");
+                  $appointments = $reservation->checkStatus($rooms_obj->id);
                   if($appointments->num_rows == 0){
                     echo '
                       <div class="available tile">
@@ -85,8 +86,8 @@
                       </div>';
                 }
               }
-              $_SESSION['startDate'] = $Date->getStartDate();
-              $_SESSION['endDate'] = $Date->getEndDate();
+              $_SESSION['startDate'] = $reservation->startDate;
+              $_SESSION['endDate'] = $reservation->endDate;
               $appointments->free();
               $rooms->free();
             }

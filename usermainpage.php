@@ -54,18 +54,21 @@
         <div id="appointments_list">
                 <h1>All Appointments</h1>
                 <table>
-                    <tr><th>ID</th><th>ROOM NAME</th><th>START TIME</th><th>END TIME</th></tr>
                         <?php
                             $date = date('Y-m-d H:i:s');
                             $userid = $_SESSION['userid'];
 
-                            if($result = $connection->query("SELECT *, appointments.id AS appointments_id FROM appointments LEFT JOIN rooms ON appointments.room_id = rooms.id WHERE appointments.user_id = '$userid'")){
+                            if($result = $connection->query("SELECT *, appointments.id AS appointments_id FROM appointments LEFT JOIN rooms ON appointments.room_id = rooms.id WHERE appointments.user_id = '$userid' AND appointments.end_time >= '$date'")){
                                 $row = $result->fetch_assoc();
                                 $id = 1;
-                                while($row = $result->fetch_assoc()){
+                                if($result->num_rows != 0)
+                                {
+                                  echo "<tr><th>ID</th><th>ROOM NAME</th><th>START TIME</th><th>END TIME</th></tr>";
+                                  while($row = $result->fetch_assoc()){
                                     echo "<tr><td>".$id."</td><td>".$row['name']."</td><td>".$row['start_time']."</td><td>".$row['end_time']."</td></tr>";
                                     $id++;
                                   }
+                                }
                             }
                         ?>
                 </table>
