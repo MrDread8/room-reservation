@@ -29,7 +29,7 @@
         <ul>
             <a href="index.php"><li>HOME</li><a>
             <a href="reservations.php"><li>RESERVATIONS</li><a>
-            <a href="userpage.php"><li>USER</li><a>
+            <a href="userprofile.php"><li>USER</li><a>
         </ul>
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
@@ -54,7 +54,6 @@
           $endDate = $_POST['endDate'];
           $endTime = $_POST['endTime'];
 
-          $conn = new dbh();
           $reservation = new reservation($startDate,$endDate,$_SESSION['userid']);
 
           $reservation->loadDate($startDate,$startTime,$endDate,$endTime);
@@ -62,16 +61,15 @@
           if($reservation->converDate() === true)
           {
 
-            if($rooms = $conn->dbConnect()->query("SELECT id FROM rooms;")){
-              while($rooms_obj = $rooms->fetch_object()){
+              while($room = $reservation->allRooms()->fetch()){
 
-                  $appointments = $reservation->checkStatus($rooms_obj->id);
-                  if($appointments->num_rows == 0){
+                  $appointments = $reservation->checkStatus($room['id']);
+                  if($appointments->rowCount() == 0){
                     echo '
                       <div class="available tile">
-                        <h1>'.$rooms_obj->id.'</h1>
+                        <h1>'.$room['id'].'</h1>
                         <form class="" action="reservate.php" method="post">
-                          <input type="hidden" name="roomId" value="'.$rooms_obj->id.'" />
+                          <input type="hidden" name="roomId" value="'.$room['id'].'" />
                           <input type="submit" name="" value="Reservate">
                         </form>
                       </div>';
@@ -79,7 +77,7 @@
                 else {
                   echo '
                     <div class="reserved tile">
-                      <h1>'.$rooms_obj->id.'</h1>
+                      <h1>'.$room['id'].'</h1>
                         <form class="" method="post">
                           <input type="submit" name="" value="Reservate" disabled>
                         </form>
@@ -88,15 +86,8 @@
               }
               $_SESSION['startDate'] = $reservation->startDate;
               $_SESSION['endDate'] = $reservation->endDate;
-              $appointments->free();
-              $rooms->free();
             }
           }
-          else {
-            echo "Erro during query! Refresh page and try again";
-          }
-
-        }
         ?>
       </div>
 

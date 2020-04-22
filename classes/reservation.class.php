@@ -5,7 +5,6 @@
     private $room_id;
     private $user_id;
     private $query;
-    public $formatDate;
 
     function __construct($startDate,$endDate,$user_id){
       $this->startDate = $startDate;
@@ -15,17 +14,19 @@
 
     public function reservate($room_id){
       $this->room_id = $room_id;
+
       $query = "INSERT INTO appointments VALUES(0,'$this->room_id','$this->user_id','$this->startDate', '$this->endDate')";
       try{
-        $this->dbConnect()->begin_transaction();
+        $this->dbConnect()->beginTransaction();
         $temp = $this->checkStatus($this->room_id);
-        if($temp->num_roms==0)
-          $this->dbConnect()->query($query);
+        if($temp->rowCount() == 0)
+          $this->dbConnect()->exec($query);
 
         $this->dbConnect()->commit();
       }
       catch (Exception $e){
         $this->dbConnect()->rollback();
+
         echo "Error: ".$e->getCode(). " Try again later.";
         return false;
       }
@@ -46,13 +47,17 @@
     }
 
     function converDate(){
-      $this->formatDate = (($this->startDate = date("Y-m-d H:i:s", $this->startDate)) != false AND ($this->endDate = date("Y-m-d H:i:s", $this->endDate)) != false) ? true : false;
-      return $this->formatDate;
+      $formatDate = (($this->startDate = date("Y-m-d H:i:s", $this->startDate)) != false AND ($this->endDate = date("Y-m-d H:i:s", $this->endDate)) != false) ? true : false;
+      return $formatDate;
     }
 
     function checkStatus($room_id){
       $query = $this->dbConnect()->query("SELECT id FROM appointments WHERE (room_id = '$room_id') AND (('$this->startDate' BETWEEN start_time AND end_time) OR ('$this->endDate' BETWEEN start_time AND end_time) OR (start_time BETWEEN '$this->startDate' AND '$this->endDate') OR (end_time BETWEEN '$this->startDate' AND '$this->endDate'))");
       return $query;
+    }
+    function allRooms(){
+      $stmt = $this->dbConnect()->query("SELECT id FROM rooms;");
+      return $stmt;
     }
   }
 
