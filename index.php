@@ -1,12 +1,10 @@
 <?php
-
     session_start();
     error_reporting(0);
     if($_SESSION['loggedin']){
         header("Location: usermainpage.php");
         exit();
     }
-    session_destroy();
 ?>
 <html lang="en">
 <head>
@@ -30,7 +28,6 @@
             <input type="submit" value="LOG IN">
         <?php
             session_start();
-            error_reporting(0);
 
             if($_SESSION['logginerror']){
                 echo "<div id='logginerror'>Incorrect login or password!</div>";

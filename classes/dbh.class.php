@@ -17,6 +17,7 @@
         $dns = 'mysql:host='.$this->db_addr.';dbname='.$this->db_name.';';
         $pdo = new PDO($dns, $this->db_login, $this->db_pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
 
         return $pdo;
       }

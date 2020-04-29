@@ -60,15 +60,15 @@
 
           if($reservation->converDate() === true)
           {
+              $row = $reservation->allRooms()->fetchAll();
+              foreach($row as $room):
+                $appointments = $reservation->checkStatus($room['id']);
 
-              while($room = $reservation->allRooms()->fetch()){
-
-                  $appointments = $reservation->checkStatus($room['id']);
-                  if($appointments->rowCount() == 0){
+                if($appointments->rowCount() == 0){
                     echo '
                       <div class="available tile">
                         <h1>'.$room['id'].'</h1>
-                        <form class="" action="reservate.php" method="post">
+                        <form class="" enctype="multipart/form-data" action="components/reservate.php" method="post">
                           <input type="hidden" name="roomId" value="'.$room['id'].'" />
                           <input type="submit" name="" value="Reservate">
                         </form>
@@ -83,11 +83,12 @@
                         </form>
                       </div>';
                 }
-              }
+            endforeach;
+            }
+
               $_SESSION['startDate'] = $reservation->startDate;
               $_SESSION['endDate'] = $reservation->endDate;
             }
-          }
         ?>
       </div>
 

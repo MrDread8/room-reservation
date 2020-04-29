@@ -14,22 +14,15 @@
 
     public function reservate($room_id){
       $this->room_id = $room_id;
-
-      $query = "INSERT INTO appointments VALUES(0,'$this->room_id','$this->user_id','$this->startDate', '$this->endDate')";
       try{
-        $this->dbConnect()->beginTransaction();
-        $temp = $this->checkStatus($this->room_id);
-        if($temp->rowCount() == 0)
-          $this->dbConnect()->exec($query);
+          $qry = $this->dbConnect()->prepare("Insert INTO appointments (`id`,`room_id`,`user_id`,`start_time`,`end_time`) VALUES (0, ?, ? , ? , ?)");
+      $qry->execute([$this->room_id,$this->user_id,$this->startDate,$this->endDate]);
 
-        $this->dbConnect()->commit();
       }
-      catch (Exception $e){
-        $this->dbConnect()->rollback();
+      catch(PDOException $e){
+          echo "Error: ".$e->getCode()." mess: ".$e->getMessage();
+      }
 
-        echo "Error: ".$e->getCode(). " Try again later.";
-        return false;
-      }
     }
 
     function loadDate($startDate,$startTime,$endDate,$endTime){
@@ -60,5 +53,3 @@
       return $stmt;
     }
   }
-
-?>

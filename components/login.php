@@ -15,19 +15,17 @@
 
     if($user->selectUser()->rowCount() != 1)
       {
-      $_SESSION['logginerror'] = true;
-      header("Location: ../index.php");
-      $result->free();
-      exit();
+        $_SESSION['logginerror'] = true;
+        header("Location: ../index.php");
+        $result->free();
+        exit();
       }
       else{
-                                $row = $user->selectUser()->fetch();
-                                $_SESSION['loggedin'] = true;
-                                $_SESSION['logginerror'] = false;
-
-                                $_SESSION['userid'] = $row['id'];
-
-                                header("Location: ../usermainpage.php");
+          $row = $user->selectUser()->fetch();
+          $_SESSION['loggedin'] = true;
+          $_SESSION['logginerror'] = false;
+          $_SESSION['userid'] = $row['id'];
+          header("Location: ../usermainpage.php");
           exit();
       }
 ?>
