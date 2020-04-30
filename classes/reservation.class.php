@@ -14,12 +14,16 @@
 
     public function reservate($room_id){
       $this->room_id = $room_id;
+      $conn = $this->dbConnect();
+      $conn->beginTransaction();
       try{
-          $qry = $this->dbConnect()->prepare("Insert INTO appointments (`id`,`room_id`,`user_id`,`start_time`,`end_time`) VALUES (0, ?, ? , ? , ?)");
-      $qry->execute([$this->room_id,$this->user_id,$this->startDate,$this->endDate]);
-
+          $qry = $conn->prepare("Insert INTO appointments (`room_id`,`user_id`,`start_time`,`end_time`) VALUES ( ?, ?, ?, ?)");
+          $qry->execute([$this->room_id,$this->user_id,$this->startDate,$this->endDate]);
+          $conn->commit();
       }
       catch(PDOException $e){
+          $conn->rollBack();
+
           echo "Error: ".$e->getCode()." mess: ".$e->getMessage();
       }
 

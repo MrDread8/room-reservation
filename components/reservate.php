@@ -3,11 +3,10 @@
 error_reporting(E_ALL);
   include('../classes/dbh.class.php');
   include('../classes/reservation.class.php');
- 
-  $conn = new dbh();
 
+$reservation = new reservation($_SESSION['startDate'],$_SESSION['endDate'],$_SESSION['userid']);
 
-$qry = $conn->dbConnect()->prepare("Insert INTO appointments (`room_id`,`user_id`,`start_time`,`end_time`) VALUES (?, ? , ? , ?)");
-$qry->execute([$_POST['roomId'],$_SESSION['userid'],$_SESSION['startDate'],$_SESSION['endDate']]);
-exit();
+$reservation->reservate($_POST['roomId']);
+
+header("Location: ../usermainpage.php");
 ?>
