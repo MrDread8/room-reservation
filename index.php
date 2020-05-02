@@ -1,7 +1,7 @@
 <?php
     session_start();
     error_reporting(0);
-    if($_SESSION['loggedin']){
+    if($_SESSION['userId']){
         header("Location: usermainpage.php");
         exit();
     }

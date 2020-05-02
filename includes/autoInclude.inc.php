@@ -6,6 +6,9 @@
     $extension = '.class.php';
     $fullPath = $path.$className.$extension;
 
+    if(!file_exists($fullPath)){
+        $fullPath = '../'.$fullPath;
+    }
     include $fullPath;
   }
 

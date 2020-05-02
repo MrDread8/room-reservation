@@ -1,7 +1,6 @@
 <?php
     session_start();
-    include('../classes/dbh.class.php');
-    include('../classes/login.class.php');
+    include('../includes/autoInclude.inc.php');
 
     $login = $_POST['login'];
     $password = $_POST['password'];
@@ -22,9 +21,8 @@
       }
       else{
           $row = $user->selectUser()->fetch();
-          $_SESSION['loggedin'] = true;
           $_SESSION['logginerror'] = false;
-          $_SESSION['userid'] = $row['id'];
+          $_SESSION['userId'] = $row['id'];
           header("Location: ../usermainpage.php");
           exit();
       }

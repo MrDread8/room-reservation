@@ -1,5 +1,5 @@
 <?php
-  include('db_connection.php');
+  include('../includes/autoInclude.inc.php');
 
   $login = "test";
   $password = hash("sha256", "test");

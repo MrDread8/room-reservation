@@ -1,15 +1,14 @@
 <?php
     session_start();
 
-    if(!$_SESSION['loggedin']){
+    if(!$_SESSION['userId']){
         header("Location: index.php");
         exit();
     }
     else
     {
-        require_once('components/db_connection.php');
+        include('includes/autoInclude.inc.php');
     }
-
 ?>
 <html lang="en">
 <head>

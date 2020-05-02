@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!$_SESSION['loggedin']){
+    if(!$_SESSION['userId']){
         header("Location: index.php");
         exit();
     }
@@ -23,7 +23,7 @@
 </head>
 <body>
     <?php
-        // require_once('components/loader.php');
+        require_once('components/loader.php');
     ?>
     <nav>
         <ul>
@@ -54,7 +54,7 @@
           $endDate = $_POST['endDate'];
           $endTime = $_POST['endTime'];
 
-          $reservation = new reservation($startDate,$endDate,$_SESSION['userid']);
+          $reservation = new reservation($startDate,$endDate,$_SESSION['userId']);
 
           $reservation->loadDate($startDate,$startTime,$endDate,$endTime);
 
