@@ -40,7 +40,7 @@ if(!isset($_SESSION['userId'])){
 $appointments = $user->getAppointments($_SESSION['userId']);
 if($appointments->rowCount() != 0){
                         $next_reservation = $appointments->fetch();
-                        echo "<h1>Next appointment</h1> ".substr($next_reservation['start_time'],0,16);
+                        echo "<h1>Next appointment</h1> ".substr($next_reservation['start_time'],0,16)." ".$next_reservation['name'];
                     }
                     else{
                         echo "<h1>Next appointment</h1> No appointments";
