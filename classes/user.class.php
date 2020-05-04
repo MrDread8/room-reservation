@@ -2,7 +2,6 @@
 class user extends dbh{
     public $login;
     public $password;
-    public $user_id;
     private $appointments;
 
     function __construct($login,$password){
@@ -42,6 +41,17 @@ $this->appointments = $connection->query("SELECT * FROM appointments LEFT JOIN r
         }
         catch(PDOException $e){
             "Error ".$e->getCode()." ".$e->getMessage();
+        }
+    }
+    function getUserData($userId){
+        try{
+            $qry = $this->dbConnect()->prepare("SELECT login, name, surname FROM users WHERE id = ?");
+            $qry->execute([$userId]);
+
+            return $qry;
+        }
+        catch(PDOException $e){
+            echo "error nr: ".$e->getCode." mess.: ".$e->getMessage();
         }
     }
 }

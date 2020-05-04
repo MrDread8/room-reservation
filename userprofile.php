@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(!$_SESSION['userId']){
+if(!isset($_SESSION['userId'])){
         header("Location: index.php");
         exit();
     }
@@ -23,7 +23,7 @@
 <body>
     <?php
         require_once('components/loader.php');
-    ?>
+?>
     <nav>
         <ul>
             <a href="index.php"><li>HOME</li><a>
@@ -33,7 +33,16 @@
         <a href="components/logout.php" id="logout-button">LOG OUT</a>
     </nav>
     <div id="content">
-        
+           <div id="avatar"></div>
+              <div id="personal-info">
+                  <div class="data" id="name"></div>
+                  <div class="data" id="surname"></div>
+              </div>
+    <?php
+                    $user = new user("","");
+
+$user->getUserData($_SESSION['userId']);
+                    ?>
     </div>
     <script src="assets/loading.js"></script>
 </body>
