@@ -6,7 +6,7 @@
     }
     else
     {
-        include('includes/autoInclude.inc.php');
+        include('include/autoInclude.inc.php');
     }
 
 ?>
@@ -15,8 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/usermainpage.min.css">
-    <link rel="stylesheet" href="style/reservations.min.css">
+    <link rel="stylesheet" href="style/main.min.css">
     <link rel="stylesheet" href="style/loader.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
     <title>Room Reservation</title>
@@ -41,7 +40,7 @@
               <input type="time" name="startTime" class="date" required>
               <input type="date" name="endDate" class="date" min="<?php echo date('d-m-Y');?>" required>
               <input type="time" name="endTime" class="date" required>
-              <input type="submit" value="Search">
+              <input class="button_blue" type="submit" value="Search">
           </form>
       </div>
 

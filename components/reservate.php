@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  include('../includes/autoInclude.inc.php');
+  include('../include/autoInclude.inc.php');
 
 $reservation = new reservation($_SESSION['startDate'],$_SESSION['endDate'],$_SESSION['userId']);
 

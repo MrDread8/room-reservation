@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include('../includes/autoInclude.inc.php');
+    include('../include/autoInclude.inc.php');
 
     $login = $_POST['login'];
     $password = $_POST['password'];

@@ -7,7 +7,7 @@ if(!isset($_SESSION['userId'])){
     }
     else
     {
-        include('includes/autoInclude.inc.php');
+        include('include/autoInclude.inc.php');
     }
 ?>
 <html lang="en">
@@ -15,7 +15,7 @@ if(!isset($_SESSION['userId'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style/usermainpage.min.css">
+    <link rel="stylesheet" href="style/main.min.css">
     <link rel="stylesheet" href="style/loader.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
     <title>Room Reservation</title>
@@ -35,15 +35,19 @@ if(!isset($_SESSION['userId'])){
     <div id="content">
            <div id="avatar"></div>
               <div id="personal-info">
-                  <div class="data" id="name"></div>
-                  <div class="data" id="surname"></div>
-              </div>
     <?php
                     $user = new user("","");
 
-$user->getUserData($_SESSION['userId']);
-                    ?>
-    </div>
+$userData = $user->getUserData($_SESSION['userId']);
+$userData = $userData->fetch();
+echo "<div class='data' id='name'>".$userData['name']."</div>";
+echo "<div class='data' id='surname'>".$userData['surname']."</div>";
+echo "<div class='data' id='surname'>".$userData['email']."</div>";
+
+?>
+<a class="button_blue" href="editinfo.php">EDIT</a>
+</div>
+</div>
     <script src="assets/loading.js"></script>
 </body>
 </html>

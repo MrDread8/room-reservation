@@ -44,11 +44,11 @@ $this->appointments = $connection->query("SELECT * FROM appointments LEFT JOIN r
         }
     }
     function getUserData($userId){
-        try{
-            $qry = $this->dbConnect()->prepare("SELECT login, name, surname FROM users WHERE id = ?");
-            $qry->execute([$userId]);
 
-            return $qry;
+        try{
+            $query = $this->dbConnect()->prepare("SELECT login, name, surname, email FROM users WHERE id = ?");
+            $query->execute([$userId]);
+            return $query;
         }
         catch(PDOException $e){
             echo "error nr: ".$e->getCode." mess.: ".$e->getMessage();

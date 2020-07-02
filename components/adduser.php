@@ -1,5 +1,5 @@
 <?php
-  include('../includes/autoInclude.inc.php');
+  include('../include/autoInclude.inc.php');
 
   $login = "test";
   $password = hash("sha256", "test");

@@ -1,8 +1,8 @@
 <?php
     session_start();
-    if($_SESSION['loggedin']){
+if(isset($_SESSION['userId'])){
         $_SESSION = array();
-        $_SESSION['loggedin'] = false;
+        session_destroy();
         header("Location: ../index.php");
         exit();
     }
