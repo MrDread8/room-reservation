@@ -34,9 +34,9 @@ if(!isset($_SESSION['userId'])){
 </nav>
 <div id="content">
        <form enctype="multipart/form-data" action="" method="POST" id="userForm">
-         <input type="text" name="name" value=""/>
-         <input type="text" name="surname" value=""/>
-         <input type="email" name="email" value=""/>
+         <input type="text" name="name" value="" placeholder="name"/>
+         <input type="text" name="surname" value="" placeholder="surname"/>
+         <input type="email" name="email" value="" placeholder="email"/>
          <input type="submit" value="CONFIRM" class="button_blue" id="buttonEditInfo"/>
        </form>
 </div>

@@ -22,32 +22,29 @@ if(!isset($_SESSION['userId'])){
 </head>
 <body>
     <?php
-        require_once('components/loader.php');
+        // require_once('components/loader.php');
+        require_once('components/menu.php');
 ?>
-    <nav>
-        <ul>
-            <a href="index.php"><li>HOME</li><a>
-            <a href="reservations.php"><li>RESERVATIONS</li><a>
-            <a href="userprofile.php"><li>USER</li><a>
-        </ul>
-        <a href="components/logout.php" id="logout-button">LOG OUT</a>
-    </nav>
     <div id="content">
            <div id="avatar"></div>
               <div id="personal-info">
     <?php
-                    $user = new user("","");
+    $user = new user("","");
+    $userData = $user->getUserData($_SESSION['userId']);
+    $userData = $userData->fetch();
 
-$userData = $user->getUserData($_SESSION['userId']);
-$userData = $userData->fetch();
-echo "<div class='data' id='name'>".$userData['name']."</div>";
-echo "<div class='data' id='surname'>".$userData['surname']."</div>";
-echo "<div class='data' id='surname'>".$userData['email']."</div>";
+    echo "<div class='data' id='name'>Name: ".$userData['name']."</div>";
+    echo "<div class='data' id='surname'>Surname: ".$userData['surname']."</div>";
+    echo "<div class='data' id='surname'>Email:".$userData['email']."</div>";
 
-?>
-<a class="button_blue" href="editinfo.php">EDIT</a>
-</div>
-</div>
+    ?>
+              </div>
+  <div class="buttons-holder">
+    <a class="button_blue" href="editinfo.php">EDIT</a>
+    <a class="button_blue" href="editinfo.php">CHANGE PASSWORD</a>
+  </div>
+
+  </div>
     <script src="assets/loading.js"></script>
 </body>
 </html>

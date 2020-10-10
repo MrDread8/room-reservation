@@ -14,7 +14,9 @@ html body {
 }
 .button_blue{
     height:50px;
-    width: 150px;
+    min-width: 150px;
+    padding: 5px;
+    max-width: 250px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -26,7 +28,7 @@ html body {
     transition: all 500ms ease;
     font-family: 'Lato',sans-serif;
     text-transform: uppercase;
-
+    clear:both;
     &:hover {
         background-color: #00A4E5;
         color: white;
@@ -160,10 +162,9 @@ nav {
   }
   #personal-info{
       width:250px;
-      height:auto;
+      height:250px;
       display:flex;
       justify-content:center;
-      align-items:center;
       flex-direction:column;
       float:left;
       .data{
@@ -173,12 +174,14 @@ nav {
           justify-content:center;
           align-items:center;
           text-transform:uppercase;
-          border-left: 2px solid #00A4E5;
-          border-top: 2px solid #00A4E5;
       }
-      .data:nth-child(1){
-          border-top: 0;
-      }
+  }
+  .buttons-holder{
+    width: 500px;
+    clear: both;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
   }
 }
 
@@ -280,9 +283,9 @@ input[type="submit"] {
 }
 #buttonEditInfo{
     height:50px;
-    margin:0;
+    margin-top:10px;
 }
 #userForm{
     display:grid;
-    grid-row-template:
+    width: 500px;
 }

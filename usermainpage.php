@@ -24,15 +24,9 @@ if(!isset($_SESSION['userId'])){
 <body>
     <?php
         require_once('components/loader.php');
+        require_once('./components/menu.php');
     ?>
-    <nav>
-        <ul>
-            <a href="index.php"><li>HOME</li><a>
-            <a href="reservations.php"><li>RESERVATIONS</li><a>
-            <a href="userprofile.php"><li>USER</li><a>
-        </ul>
-        <a href="components/logout.php" id="logout-button">LOG OUT</a>
-    </nav>
+
     <div id="content">
         <div id="next_appointment">
             <?php
