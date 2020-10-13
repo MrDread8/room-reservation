@@ -35,7 +35,7 @@ class user extends dbh{
         $connection = $this->dbConnect();
         try{
 
-$this->appointments = $connection->query("SELECT * FROM appointments LEFT JOIN rooms ON rooms.id = appointments.room_id WHERE appointments.user_id = '$userId' AND appointments.end_time >= '$date' ORDER BY appointments.start_time ASC;");
+        $this->appointments = $connection->query("SELECT * FROM appointments LEFT JOIN rooms ON rooms.id = appointments.room_id WHERE appointments.user_id = '$userId' AND appointments.end_time >= '$date' ORDER BY appointments.start_time ASC;");
 
         return $this->appointments;
         }
@@ -44,14 +44,23 @@ $this->appointments = $connection->query("SELECT * FROM appointments LEFT JOIN r
         }
     }
     function getUserData($userId){
-
         try{
-            $query = $this->dbConnect()->prepare("SELECT login, name, surname, email FROM users WHERE id = ?");
+            $query = $this->dbConnect()->prepare("SELECT login, name, surname, email FROM users WHERE id LIKE ?");
             $query->execute([$userId]);
             return $query;
         }
         catch(PDOException $e){
-            echo "error nr: ".$e->getCode." mess.: ".$e->getMessage();
+            echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
         }
+    }
+    function setUserData($userFirstName,$userLastName,$userEmail,$userId){
+      $connection = $this->dbConnect();
+      try{
+        $query = $connection->prepare("UPDATE users SET name =?, surname = ?, email = ? WHERE id = ?;");
+        $query->execute([$userFirstName,$userLastName,$userEmail,$userId]);
+      }
+      catch(PDOException $e){
+        echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
+      }
     }
 }

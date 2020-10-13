@@ -33,10 +33,10 @@ if(!isset($_SESSION['userId'])){
       <a href="components/logout.php" id="logout-button">LOG OUT</a>
 </nav>
 <div id="content">
-       <form enctype="multipart/form-data" action="" method="POST" id="userForm">
-         <input type="text" name="name" value="" placeholder="name"/>
-         <input type="text" name="surname" value="" placeholder="surname"/>
-         <input type="email" name="email" value="" placeholder="email"/>
+       <form enctype="multipart/form-data" action="components/updateInfo.php" method="POST" id="userForm">
+         <input type="text" name="firstName" value="" placeholder="First Name"/>
+         <input type="text" name="lastName" value="" placeholder="Last Name"/>
+         <input type="text" name="email" value="" placeholder="email"/>
          <input type="submit" value="CONFIRM" class="button_blue" id="buttonEditInfo"/>
        </form>
 </div>

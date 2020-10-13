@@ -35,7 +35,7 @@ if(!isset($_SESSION['userId'])){
 
     echo "<div class='data' id='name'>Name: ".$userData['name']."</div>";
     echo "<div class='data' id='surname'>Surname: ".$userData['surname']."</div>";
-    echo "<div class='data' id='surname'>Email:".$userData['email']."</div>";
+    echo "<div class='data' id='surname'>E-mail: ".$userData['email']."</div>";
 
     ?>
               </div>
