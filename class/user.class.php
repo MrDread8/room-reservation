@@ -4,11 +4,12 @@ class user extends dbh{
     public $password;
     private $appointments;
 
+    // get password and login on init
     function __construct($login,$password){
         $this->login = $login;
         $this->password = $this->hash($password);
     }
-
+    // select users with matching password and login
     function selectUser(){
         try{
             $query = $this->dbConnect()->prepare("SELECT * FROM users WHERE login = ? AND password = ?");
@@ -25,11 +26,13 @@ class user extends dbh{
         }
     }
 
+    // hash
     private function hash($text){
         $text = hash("sha256", $text);
         return $text;
     }
 
+    // get future appointments for user
     public function getAppointments($userId){
         $date = date('Y-m-d H:i:s');
         $connection = $this->dbConnect();
@@ -43,6 +46,7 @@ class user extends dbh{
             "Error ".$e->getCode()." ".$e->getMessage();
         }
     }
+    // get all user informations
     function getUserData($userId){
         try{
             $query = $this->dbConnect()->prepare("SELECT login, name, surname, email FROM users WHERE id LIKE ?");
@@ -53,14 +57,28 @@ class user extends dbh{
             echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
         }
     }
+    // set user informations
     function setUserData($userFirstName,$userLastName,$userEmail,$userId){
       $connection = $this->dbConnect();
+      $connection->beginTransaction();
+
       try{
-        $query = $connection->prepare("UPDATE users SET name =?, surname = ?, email = ? WHERE id = ?;");
-        $query->execute([$userFirstName,$userLastName,$userEmail,$userId]);
+        $query = $connection->prepare("UPDATE users SET `name` ='?', `surname` = '?', `email` = '?' WHERE `id` = '?';");
+        if (!$query) {
+          echo "\nPDO::errorInfo():\n";
+          print_r($connection->errorInfo());
+        }
+        $query->execute([$userFirstName,$userLastName, $userEmail,$userId]);
       }
       catch(PDOException $e){
         echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
       }
+    }
+    function insertUser(){
+      $login = "test2";
+      $password = hash("sha256", "test2");
+      $connection = $this->dbConnect();
+      $query = $this->dbConnect()->prepare("Insert INTO users VALUES (?,?,?,?,?,?)");
+      $query->execute([0,$login,$password,"test2","test2","test2"]);
     }
 }

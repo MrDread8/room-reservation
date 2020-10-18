@@ -7,5 +7,5 @@
   $user = new user("","");
 
   // run update data
-  $user->setUserData($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_SESSION['userId']); 
+  $user->setUserData($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_SESSION['userId']);
 ?>

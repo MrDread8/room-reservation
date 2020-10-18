@@ -8,16 +8,17 @@
 
     function dbConnect(){
 
-      $this->db_addr = "localhost";
+      $this->db_addr = "127.0.0.1";
       $this->db_login = "root";
       $this->db_pass = "";
-      $this->db_name = "company";
+      $this->db_name = "hotel";
       $this->db_charset = "utf8";
       try{
         $dns = 'mysql:host='.$this->db_addr.';dbname='.$this->db_name.';';
         $pdo = new PDO($dns, $this->db_login, $this->db_pass);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, FALSE);
+        $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
         return $pdo;
       }
@@ -26,3 +27,4 @@
       }
    }
 }
+?>
