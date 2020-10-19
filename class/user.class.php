@@ -59,7 +59,7 @@ class user extends dbh{
     }
     function insertUser(){
       $login = "test2";
-      $password = hash("sha256", "test2");
+      $password = $this->hash("test2");
       $connection = $this->dbConnect();
       $query = $this->dbConnect()->prepare("Insert INTO users VALUES (?,?,?,?,?,?)");
       $query->execute([0,$login,$password,"test2","test2","test2"]);

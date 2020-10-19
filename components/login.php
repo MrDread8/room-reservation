@@ -21,6 +21,11 @@
       }
       else{
           $row = $user->selectUser()->fetch();
+          if($row['verif']){
+            header("Location: ../index.php");
+            $result->free();
+            exit();
+          }
           $_SESSION['logginerror'] = false;
           $_SESSION['userId'] = $row['id'];
           header("Location: ../usermainpage.php");
