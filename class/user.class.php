@@ -57,28 +57,24 @@ class user extends dbh{
             echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
         }
     }
-    // set user informations
-    function setUserData($userFirstName,$userLastName,$userEmail,$userId){
-      $connection = $this->dbConnect();
-      $connection->beginTransaction();
-
-      try{
-        $query = $connection->prepare("UPDATE users SET `name` ='?', `surname` = '?', `email` = '?' WHERE `id` = '?';");
-        if (!$query) {
-          echo "\nPDO::errorInfo():\n";
-          print_r($connection->errorInfo());
-        }
-        $query->execute([$userFirstName,$userLastName, $userEmail,$userId]);
-      }
-      catch(PDOException $e){
-        echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
-      }
-    }
     function insertUser(){
       $login = "test2";
       $password = hash("sha256", "test2");
       $connection = $this->dbConnect();
       $query = $this->dbConnect()->prepare("Insert INTO users VALUES (?,?,?,?,?,?)");
       $query->execute([0,$login,$password,"test2","test2","test2"]);
+    }
+    function setUserData($userFirstName,$userLastName, $userEmail,$userId){
+      $connection= $this->dbConnect();
+      $connection->beginTransaction();
+      try{
+        $query = $connection->prepare("UPDATE `users` SET `name`=?,`surname`=?,`email`=? WHERE id=?;");
+        $query->execute([$userFirstName,$userLastName, $userEmail,$userId]);
+        $connection->commit();
+      }
+      catch(PDOException $e){
+        $connection->rollBack();
+        echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
+      }
     }
 }

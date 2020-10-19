@@ -11,7 +11,7 @@
       $this->db_addr = "127.0.0.1";
       $this->db_login = "root";
       $this->db_pass = "";
-      $this->db_name = "hotel";
+      $this->db_name = "company";
       $this->db_charset = "utf8";
       try{
         $dns = 'mysql:host='.$this->db_addr.';dbname='.$this->db_name.';';

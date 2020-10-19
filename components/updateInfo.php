@@ -3,9 +3,18 @@
   error_reporting(1);
   include('../include/autoInclude.inc.php');
 
-  // Just for access to user data function
+  // creatin class for update function
   $user = new user("","");
 
-  // run update data
-  $user->setUserData($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_SESSION['userId']);
+  // load data from form to var
+  $userFirstName = $_POST['firstName'];
+  $userLastName = $_POST['lastName'];
+  $userEmail = $_POST['email'];
+  $userId =  $_SESSION['userId'];
+
+  // run update
+  $user->setUserData($userFirstName,$userLastName, $userEmail,$userId);
+
+  // redirect
+  header("Location: ../userprofile.php");
 ?>
