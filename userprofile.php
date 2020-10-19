@@ -22,8 +22,7 @@ if(!isset($_SESSION['userId'])){
 </head>
 <body>
     <?php
-        // require_once('components/loader.php');
-        require_once('components/menu.php');
+        require_once("assets/menu.php");
 ?>
     <div id="content">
            <div id="avatar"></div>
@@ -41,7 +40,7 @@ if(!isset($_SESSION['userId'])){
               </div>
   <div class="buttons-holder">
     <a class="button_blue" href="editinfo.php">EDIT</a>
-    <a class="button_blue" href="editinfo.php">CHANGE PASSWORD</a>
+    <a class="button_blue" href="editPassword.php">CHANGE PASSWORD</a>
   </div>
 
   </div>

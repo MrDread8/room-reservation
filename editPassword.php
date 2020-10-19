@@ -5,6 +5,10 @@ if(!isset($_SESSION['userId'])){
         header("Location: index.php");
         exit();
     }
+    else
+    {
+        include('include/autoInclude.inc.php');
+    }
 ?>
 <html lang="en">
 <head>
@@ -20,7 +24,6 @@ if(!isset($_SESSION['userId'])){
 <?php
   require_once("assets/menu.php");
 ?>
-
 <div id="content">
        <form enctype="multipart/form-data" action="components/updateInfo.php" method="POST" id="userForm">
          <input type="text" name="firstName" value="" placeholder="First Name"/>

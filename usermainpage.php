@@ -23,8 +23,7 @@ if(!isset($_SESSION['userId'])){
 </head>
 <body>
     <?php
-        require_once('components/loader.php');
-        require_once('./components/menu.php');
+        require_once("assets/menu.php");
     ?>
 
     <div id="content">

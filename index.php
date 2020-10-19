@@ -17,9 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=Lato|Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php
-        require_once('components/loader.php');
-    ?>
     <div id="content">
         <form action="components/login.php" method="POST" enctype="multipart/form-data">
         <h1>LOGIN</h1>
@@ -32,13 +29,14 @@
             if($_SESSION['logginerror']){
                 echo "<div id='logginerror'>Incorrect login or password!</div>";
             }
-            $_SESSION = array();
+            elseif($_SESSION['notverif']){
+                echo "<div id='notverified'>Your account is not verified. Contact administrator!</div>";
+            }
             session_destroy();
+            $_SESSION = array();
         ?>
         </form>
     </div>
-
-    <script src="assets/loading.js"></script>
-
+<a href="#">Admin</a>
 </body>
 </html>

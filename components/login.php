@@ -21,14 +21,18 @@
       }
       else{
           $row = $user->selectUser()->fetch();
-          if($row['verif']){
+          if($row['verif'] == false){
+            $_SESSION['notverif'] = true;
             header("Location: ../index.php");
             $result->free();
             exit();
           }
-          $_SESSION['logginerror'] = false;
-          $_SESSION['userId'] = $row['id'];
-          header("Location: ../usermainpage.php");
-          exit();
+          else
+          {
+            var_dump($_SESSION['logginerror']);
+            var_dump($_SESSION['notverif']);
+            $_SESSION['userId'] = $row['id'];
+            header("Location: ../usermainpage.php");
+            exit();}
       }
 ?>

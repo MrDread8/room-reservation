@@ -26,7 +26,7 @@ class user extends dbh{
         }
     }
 
-    // hash
+    // hash text
     private function hash($text){
         $text = hash("sha256", $text);
         return $text;
@@ -57,6 +57,7 @@ class user extends dbh{
             echo "error nr: ".$e->getCode()." mess.: ".$e->getMessage();
         }
     }
+    //
     function insertUser(){
       $login = "test2";
       $password = $this->hash("test2");
@@ -64,6 +65,7 @@ class user extends dbh{
       $query = $this->dbConnect()->prepare("Insert INTO users VALUES (?,?,?,?,?,?)");
       $query->execute([0,$login,$password,"test2","test2","test2"]);
     }
+    // update user data
     function setUserData($userFirstName,$userLastName, $userEmail,$userId){
       $connection= $this->dbConnect();
       $connection->beginTransaction();

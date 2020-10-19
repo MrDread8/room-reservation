@@ -8,7 +8,7 @@
 
     function dbConnect(){
 
-      $this->db_addr = "127.0.0.1";
+      $this->db_addr = "localhost";
       $this->db_login = "root";
       $this->db_pass = "";
       $this->db_name = "company";
